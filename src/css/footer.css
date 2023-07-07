@@ -1,0 +1,15 @@
+.caution {
+    float: right;
+    width: auto;
+    padding: 10px;
+    /* background-color: rgba(204, 203, 203, 0.5); */
+}
+
+.caution ul {
+    list-style: none;
+    text-align: left;
+}
+
+.caution .returnpage {
+    text-align: right;
+}

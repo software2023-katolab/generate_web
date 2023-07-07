@@ -1,0 +1,70 @@
+/* .head_location {
+    list-style: none;
+    text-align: center;
+} */
+
+/* 1ページ目のレース表 */
+
+.raceTableTitle {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.raceTable {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.raceTable ul {
+    list-style: none;
+    width: 250px;
+    border:1px solid #010202;
+    margin: 1px;
+    background-color: #010202;
+    padding: 3px;
+  }
+
+/* .raceTable li {
+    text-align: left;
+    border:1px solid #010202;
+    margin-left: 1px;
+    margin-right: 1px;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+} */
+
+/* --- 電光掲示板風 --- */
+/* 参考 https://pa-tu.work/blog/electric-board */
+.raceTable li {
+    position: relative;
+    padding: 0.5rem;
+    border: 10px solid #26252B;
+    background-color: #1a1015;
+    color: #ff9100;
+    font-size: 26px;
+    font-weight: bold;
+    text-shadow: 0 0 20px;
+}
+/* .raceTable li:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+      transparent 0 1px, 
+      rgba(0, 0, 0, .7) 1px
+    );
+    background-size: 3px 3px;
+    content: '';
+} */
+/* --------------------- */
+
+.raceTable .location {
+    text-align: center;
+}
+
+.raceTable a {
+    color: #ff9100;
+    text-decoration: none;
+}
