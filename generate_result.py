@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 
+
 def get_dates():
     today = datetime.date.today()
     current_weekday = today.weekday()
@@ -15,7 +16,8 @@ def get_dates():
 
     return [last_saturday, last_sunday, this_saturday, this_sunday]
 
-def gen_result_html(cursor, race_id, name, location):
+
+def gen_result_html(cursor, race_id, name, location, number):
     head = """
     <!-- ２ページ目 -->
     <!DOCTYPE html>
@@ -26,6 +28,18 @@ def gen_result_html(cursor, race_id, name, location):
         </head>
 
         <body>
+        
+            <header class="header">
+                <div class="header-inner">
+                    <a class="header-logo" href="../this_sat.html">
+                        <img class="logo" src="../image/katomusume_clear.png') }}">
+                    </a>
+                </div>
+                <div class="race-info">
+                    <p>{} {}R:{}</p>
+                </div>
+            </header>    
+        
             <h1>name: {}</h2>
             <h2>location: {}</h2>
             <table>
@@ -40,7 +54,7 @@ def gen_result_html(cursor, race_id, name, location):
                     </tr>
                 </thead>
                 <tbody>
-    """.format(name, name, location)
+    """.format(name, location, number, name, name, location)
     column = """
                 </tbody>
             </table>
@@ -69,7 +83,7 @@ def gen_result_html(cursor, race_id, name, location):
     </html>
     """
 
-    ############################################################################### 
+    ###############################################################################
     cursor.execute("""
                 SELECT 
                         number, position, name, gender, age, jockey, odds
@@ -93,7 +107,7 @@ def gen_result_html(cursor, race_id, name, location):
             <td>騎手：{}</td>
             <td>予想オッズ：{}</td>
         </tr>
-        """.format( 
+        """.format(
             runner[0],
             runner[1],
             runner[2],
@@ -103,7 +117,7 @@ def gen_result_html(cursor, race_id, name, location):
             runner[6],
         )
         runners_table += row
-    ############################################################################### 
+    ###############################################################################
     pred_table = ""
     for i in range(1, 6):
         pred_head = """
@@ -116,9 +130,10 @@ def gen_result_html(cursor, race_id, name, location):
         """.format(i)
 
         pred_kinds = ""
-        cursor.execute('SELECT kind, rank, forecast, payoff FROM predicts where race_id={}'.format(race_id))
+        cursor.execute(
+            'SELECT kind, rank, forecast, payoff FROM predicts where race_id={}'.format(race_id))
         predicts = cursor.fetchall()
-        for predict in predicts: 
+        for predict in predicts:
             if predict[1] == i:
                 pred = """
                     <td>{}<br>{}<br>{}<br>{}</td>
@@ -129,12 +144,29 @@ def gen_result_html(cursor, race_id, name, location):
                     predict[3],
                 )
                 pred_kinds += pred
-        
-        pred_table += pred_head + pred_kinds + pred_foot
 
-    
-    html = head + runners_table + column + pred_table + foot
+        pred_table += pred_head + pred_kinds + pred_foot
+        
+    footer = """
+            <footer>
+                <div class="caution">
+                    <ul>
+                        <li>(注)本サイトはあくまで競馬の結果を予測するものであり、結果を保証するものではありません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サイトが提供するいかなるサービスを利用したことにより利用者に発生した損害について</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
+                    </ul>
+                    
+                    <a class="returnpage" href="{{ url_for('this_saturday') }}">
+                        <p>トップページへ</p>
+                    </a>
+                </div>
+            </footer>
+        """
+
+    html = head + runners_table + column + pred_table + foot + footer
     return html
+
 
 def main():
     conn = sqlite3.connect('./races.sqlite')
@@ -144,16 +176,18 @@ def main():
     # dates[0] = "2023-06-17"
     for date in dates:
         cursor.execute("""
-                    SELECT id, name, location FROM races WHERE date='{}'
+                    SELECT id, name, location, number FROM races WHERE date='{}'
         """.format(date))
         races = cursor.fetchall()
 
         for race in races:
-            html = gen_result_html(cursor, race[0], race[1], race[2])
-            f = open('src/result/{}.html'.format(race[0]), 'w', encoding='utf-8')
+            html = gen_result_html(cursor, race[0], race[1], race[2], race[3])
+            f = open(
+                'src/result/{}.html'.format(race[0]), 'w', encoding='utf-8')
             f.write(html)
             f.close
     conn.close()
+
 
 if __name__ == "__main__":
     main()
