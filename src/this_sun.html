@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今週日曜</title>
+    <link rel="stylesheet" href='css/style.css'>
+</head>
+
+<body>
+    <header class="header">
+        <p class="weekTitle">AIによる競馬の結果予想</p>
+        <div class="header-inner">
+            <a class="header-logo" href="this_sat.html">
+                <img id="logo-img" class="logo" src="image/katomusume_clear.png">
+            </a>    
+        </div>
+    </header>
+    
+    <div class="leftTime">
+        <p>
+            予想結果更新まで残り <span id="left_days"></span>日 <span id="left_hours"></span>時間
+            <span id="left_mins"></span>分 <span id="left_secs"></span>秒
+        </p>
+        <script src="js/countdown.js"></script>
+    </div>
+
+    <div class="dateButtons">
+        <div class="weekButtons">
+            <a class="btn btn-border" href="last_sun.html"><span>先週</span></a>
+            <a class="pushed"><span>今週</span></a>
+        </div>
+
+        <div class="dayButtons">
+            <a class="btn btn-border" href="this_sat.html"><span>土曜</span></a>
+            <a class="pushed"><span>日曜</span></a>
+        </div>
+    </div>
+
+    <div class="mitei">
+        <p class="notyet">まだレースの詳細はありません</p>
+        <img class="dogeza" src="image/pose_syazai_man_png">
+    </div>
+
+    <footer>
+        <div class="caution">
+            <ul>
+                <li>(注)本サイトはあくまで競馬の結果を予測するものであり、結果を保証するものではありません。</li>
+                <li>&emsp;&nbsp;&nbsp;&thinsp;本サイトが提供するいかなるサービスを利用したことにより利用者に発生した損害について</li>
+                <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
+                <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
+            </ul>
+            
+            <a class="returnpage" href="{{ url_for('this_saturday') }}">
+                <p>トップページへ</p>
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
