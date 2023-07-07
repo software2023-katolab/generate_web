@@ -40,8 +40,6 @@ def gen_result_html(cursor, race_id, name, location, number):
                 </div>
             </header>    
         
-            <h1>name: {}</h2>
-            <h2>location: {}</h2>
             <table>
                 <thead>
                     <tr>
