@@ -1,0 +1,41 @@
+/*https://colorhunt.co/palette/3aa6b9ffd0d0ff9eaac1ece4*/
+
+.weekButtons, .dayButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.pushed {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #242921;
+  border-radius: 0.5rem;
+  width: 40%;
+  margin-top: 7px;
+  margin-bottom: 3px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.pushed span {
+  position: relative;
+  display: block;
+  padding: 1.25rem 3rem;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  background-color: #7a8375;
+}

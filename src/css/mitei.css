@@ -1,0 +1,14 @@
+.mitei {
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.mitei .notyet {
+    text-align: center;
+    font-size: 30px;
+}
+
+.mitei .dogeza {
+    margin: auto;
+    display: block;
+}
