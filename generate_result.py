@@ -22,9 +22,12 @@ def gen_result_html(cursor, race_id, name, location, number):
     <!-- ２ページ目 -->
     <!DOCTYPE html>
     <html>
-        <head>
+        <head>        
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../css/style.css">
             <title>{}</title>
-            <style src="style.css"></style>
         </head>
 
         <body>
@@ -32,27 +35,28 @@ def gen_result_html(cursor, race_id, name, location, number):
             <header class="header">
                 <div class="header-inner">
                     <a class="header-logo" href="../this_sat.html">
-                        <img class="logo" src="../image/katomusume_clear.png') }}">
+                        <img class="logo" src="../image/katomusume_clear.png">
                     </a>
                 </div>
                 <div class="race-info">
                     <p>{} {}R:{}</p>
                 </div>
             </header>    
-        
-            <table>
-                <thead>
-                    <tr>
-                        <th>枠</th>
-                        <th>馬番</th>
-                        <th>馬名</th>
-                        <th>性齢</th>
-                        <th>騎手</th>
-                        <th>予想オッズ</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="raceCard">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>枠</th>
+                            <th>馬番</th>
+                            <th>馬名</th>
+                            <th>性齢</th>
+                            <th>騎手</th>
+                            <th>予想オッズ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
     """.format(name, location, number, name, name, location)
+
     column = """
                 </tbody>
             </table>
@@ -74,12 +78,46 @@ def gen_result_html(cursor, race_id, name, location, number):
                 </thead>
                 <tbody>
     """
-    foot = """
-                </tbody>
-            </table>
+
+    apologize = """
+        <div class="mitei">
+            <p class="notyet">まだ予測結果はありません</p>
+            <div class="leftTime">
+                <p>
+                    予想結果更新まで残り <span id="left_days"></span>日 <span id="left_hours"></span>時間
+                    <span id="left_mins"></span>分 <span id="left_secs"></span>秒
+                </p>
+                <script src="../js/countdown.js"></script>
+            </div>
+            <img class="dogeza" src="../image/pose_syazai_man.png">
+        </div>
+    """
+
+    pred_footer = """
+            </tbody>
+        </table>
+    """
+
+    footer = """
+        <script src="../js/zawazawa.js"></script>
+            <footer>
+                <div class="caution">
+                    <ul>
+                        <li>(注)本サイトはあくまで競馬の結果を予測するものであり、結果を保証するものではありません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サイトが提供するいかなるサービスを利用したことにより利用者に発生した損害について</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
+                    </ul>
+                    
+                    <a class="returnpage" href="../this_sat.html">
+                        <p>トップページへ</p>
+                    </a>
+                </div>
+            </footer>
         </body>
     </html>
     """
+
 
     ###############################################################################
     cursor.execute("""
@@ -95,17 +133,28 @@ def gen_result_html(cursor, race_id, name, location, number):
     """.format(race_id))
     runners = cursor.fetchall()
     runners_table = ""
+    colors = [
+        "background-color: white;",
+        "color: white; background-color: black;",
+        "background-color: red;",
+        "background-color: blue;",
+        "background-color: yellow;",
+        "background-color: green;",
+        "background-color: orange;",
+        "background-color: pink;",
+        ]
     for runner in runners:
         row = """
         <tr>
-            <td>枠番：{}</td>
-            <td>馬番：{}</td>
-            <td>馬名：{}</td>
-            <td>性齢：{}{}</td>
-            <td>騎手：{}</td>
-            <td>予想オッズ：{}</td>
+            <td style="{}">{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}{}</td>
+            <td>{}</td>
+            <td>{}</td>
         </tr>
         """.format(
+            colors[runner[0]-1],
             runner[0],
             runner[1],
             runner[2],
@@ -115,6 +164,10 @@ def gen_result_html(cursor, race_id, name, location, number):
             runner[6],
         )
         runners_table += row
+
+    runners_table += """
+        </div>
+    """
     ###############################################################################
     pred_table = ""
     for i in range(1, 6):
@@ -145,24 +198,7 @@ def gen_result_html(cursor, race_id, name, location, number):
 
         pred_table += pred_head + pred_kinds + pred_foot
         
-    footer = """
-            <footer>
-                <div class="caution">
-                    <ul>
-                        <li>(注)本サイトはあくまで競馬の結果を予測するものであり、結果を保証するものではありません。</li>
-                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サイトが提供するいかなるサービスを利用したことにより利用者に発生した損害について</li>
-                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
-                        <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
-                    </ul>
-                    
-                    <a class="returnpage" href="{{ url_for('this_saturday') }}">
-                        <p>トップページへ</p>
-                    </a>
-                </div>
-            </footer>
-        """
-
-    html = head + runners_table + column + pred_table + foot + footer
+    html = head + runners_table + column + (pred_table + pred_footer if len(predicts) > 0 else apologize) + footer
     return html
 
 

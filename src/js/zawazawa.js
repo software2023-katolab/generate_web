@@ -1,7 +1,7 @@
 // カイジ風「ざわ。。。」を出現させるjs
 function displayZawa(top, left, scale) {
     const imageElement = document.createElement("img");
-    imageElement.src = "../../static/image/zawa.png";
+    imageElement.src = "../image/zawa.png";
 
     imageElement.style.position = "fixed";
     imageElement.style.top = top;
