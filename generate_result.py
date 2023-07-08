@@ -41,7 +41,10 @@ def gen_result_html(cursor, race_id, name, location, number):
                 <div class="race-info">
                     <p>{} {}R:{}</p>
                 </div>
-            </header>    
+            </header>
+            
+            <script src="../js/logo_resize.js"></script>
+            
             <div class="raceCard">
                 <table>
                     <thead>

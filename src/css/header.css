@@ -18,7 +18,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 110px;
+    width: 13vw;
+    height: atuo;
 }
 
 .weekTitle, .race-info {
