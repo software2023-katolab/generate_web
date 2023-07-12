@@ -61,9 +61,6 @@ def gen_result_html(cursor, race_id, name, location, number):
     """.format(name, location, number, name, name, location)
 
     column = """
-                </tbody>
-            </table>
-            
             <h3>予測結果</h3>
             <table>
                 <thead>
@@ -169,6 +166,8 @@ def gen_result_html(cursor, race_id, name, location, number):
         runners_table += row
 
     runners_table += """
+                    </tbody>
+            </table>
         </div>
     """
     ###############################################################################
@@ -201,7 +200,7 @@ def gen_result_html(cursor, race_id, name, location, number):
 
         pred_table += pred_head + pred_kinds + pred_foot
         
-    html = head + runners_table + column + (pred_table + pred_footer if len(predicts) > 0 else apologize) + footer
+    html = head + runners_table + (column + pred_table + pred_footer if len(predicts) > 0 else apologize) + footer
     return html
 
 
