@@ -188,7 +188,7 @@ def gen_result_html(cursor, race_id, name, location, number):
     """
 
     cursor.execute(
-        'SELECT runners_number model1 model2 model3 model4 model5 model6 model7 model8 FROM predicts where race_id={}'.format(race_id))
+        'SELECT runners_number, model1, model2, model3, model4, model5, model6, model7, model8 FROM predicts where race_id={}'.format(race_id))
     predicts = cursor.fetchall()
     for predict in predicts:
         pred = """
