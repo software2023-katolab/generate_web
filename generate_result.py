@@ -1,7 +1,6 @@
 import sqlite3
 import datetime
 
-
 def get_dates():
     today = datetime.date.today()
     current_weekday = today.weekday()
@@ -16,13 +15,12 @@ def get_dates():
 
     return [last_saturday, last_sunday, this_saturday, this_sunday]
 
-
 def gen_result_html(cursor, race_id, name, location, number):
     head = """
     <!-- ２ページ目 -->
     <!DOCTYPE html>
     <html>
-        <head>        
+        <head>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +29,7 @@ def gen_result_html(cursor, race_id, name, location, number):
         </head>
 
         <body>
-        
+
             <header class="header">
                 <div class="header-inner">
                     <a class="header-logo" href="../this_sat.html">
@@ -42,9 +40,9 @@ def gen_result_html(cursor, race_id, name, location, number):
                     <p>{} {}R:{}</p>
                 </div>
             </header>
-            
+
             <script src="../js/logo_resize.js"></script>
-            
+
             <div class="raceCard">
                 <table>
                     <thead>
@@ -108,7 +106,7 @@ def gen_result_html(cursor, race_id, name, location, number):
                         <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
                         <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
                     </ul>
-                    
+
                     <a class="returnpage" href="../this_sat.html">
                         <p>トップページへ</p>
                     </a>
@@ -118,14 +116,13 @@ def gen_result_html(cursor, race_id, name, location, number):
     </html>
     """
 
-
     ###############################################################################
     cursor.execute("""
-                SELECT 
+                SELECT
                         number, position, name, gender, age, jockey, odds
-                FROM 
-                        runners inner join horses 
-                ON 
+                FROM
+                        runners inner join horses
+                ON
                         runners.horse_id = horses.id
                 WHERE
                         race_id = {}
@@ -171,38 +168,61 @@ def gen_result_html(cursor, race_id, name, location, number):
         </div>
     """
     ###############################################################################
-    pred_table = ""
-    for i in range(1, 6):
-        pred_head = """
+# <h3>予測結果</h3>
+    pred_table = """
+         <table>
+             <thead>
+                 <tr>
+                     <th>馬番</th>
+                     <th>モデル1</th>
+                     <th>モデル2</th>
+                     <th>モデル3</th>
+                     <th>モデル4</th>
+                     <th>モデル5</th>
+                     <th>モデル6</th>
+                     <th>モデル7</th>
+                     <th>モデル8</th>
+                 </tr>
+             </thead>
+             <tbody>
+    """
+
+    cursor.execute(
+        'SELECT runners_number model1 model2 model3 model4 model5 model6 model7 model8 FROM predicts where race_id={}'.format(race_id))
+    predicts = cursor.fetchall()
+    for predict in predicts:
+        pred = """
         <tr>
             <th>{}</th>
-        """.format(i)
-
-        pred_foot = """
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
+            <td>{}</td>
         </tr>
-        """.format(i)
+        """.format(
+            predict[0],
+            predict[1],
+            predict[2],
+            predict[3],
+            predict[4],
+            predict[5],
+            predict[6],
+            predict[7],
+            predict[8],
+        )
+        pred_table += pred
 
-        pred_kinds = ""
-        cursor.execute(
-            'SELECT kind, rank, forecast, payoff FROM predicts where race_id={}'.format(race_id))
-        predicts = cursor.fetchall()
-        for predict in predicts:
-            if predict[1] == i:
-                pred = """
-                    <td>{}<br>{}<br>{}<br>{}</td>
-                """.format(
-                    predict[0],
-                    predict[1],
-                    predict[2],
-                    predict[3],
-                )
-                pred_kinds += pred
+    pred_table += """
+        </tbody>
+    </table>
+    """
 
-        pred_table += pred_head + pred_kinds + pred_foot
-        
-    html = head + runners_table + (column + pred_table + pred_footer if len(predicts) > 0 else apologize) + footer
+    html = head + runners_table + (pred_table if len(predicts) > 0 else apologize) + footer
     return html
-
 
 def main():
     conn = sqlite3.connect('./races.sqlite')
@@ -223,7 +243,6 @@ def main():
             f.write(html)
             f.close
     conn.close()
-
 
 if __name__ == "__main__":
     main()
