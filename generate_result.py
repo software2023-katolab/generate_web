@@ -15,6 +15,12 @@ def get_dates():
 
     return [last_saturday, last_sunday, this_saturday, this_sunday]
 
+def waku_color(runners, pred_run_num):
+    for runner in runners:
+        if(runner[0] == pred_run_num):
+            return runner[1]
+        
+
 def gen_result_html(cursor, race_id, name, location, number):
     head = """
     <!-- ２ページ目 -->
@@ -133,9 +139,9 @@ def gen_result_html(cursor, race_id, name, location, number):
             <td>{}</td>
         </tr>
         """.format(
-            colors[runner[0]-1],
-            runner[0],
+            colors[runner[1]-1],
             runner[1],
+            runner[0],
             runner[2],
             runner[3],
             runner[4],
@@ -177,7 +183,7 @@ def gen_result_html(cursor, race_id, name, location, number):
     for predict in predicts:
         pred = """
         <tr>
-            <th>{}</th>
+            <th style="{}">{}</th>
             <td>{}</td>
             <td>{}</td>
             <td>{}</td>
@@ -188,6 +194,7 @@ def gen_result_html(cursor, race_id, name, location, number):
             <td>{}</td>
         </tr>
         """.format(
+            colors[waku_color(runners, predict[0])-1],
             predict[0],
             predict[1],
             predict[2],
