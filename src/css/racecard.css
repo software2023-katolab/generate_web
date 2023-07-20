@@ -10,6 +10,8 @@
 .raceCard table td {
     padding: 10px 0;
     text-align: center;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .raceCard table tbody tr:nth-child(odd) {
