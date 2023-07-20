@@ -87,7 +87,7 @@ def gen_result_html(cursor, race_id, name, location, number):
                 </p>
                 <script src="../js/countdown.js"></script>
             </div>
-            <img class="dogeza" src="../image/pose_syazai_man.png">
+            <img class="dogeza" src="../image/yakidogeza.jpg">
         </div>
     """
 
@@ -97,6 +97,7 @@ def gen_result_html(cursor, race_id, name, location, number):
     """
 
     footer = """
+        <script src="../js/addTop3Class.js"></script>
         <script src="../js/zawazawa.js"></script>
             <footer>
                 <div class="caution">
@@ -170,21 +171,23 @@ def gen_result_html(cursor, race_id, name, location, number):
     ###############################################################################
 # <h3>予測結果</h3>
     pred_table = """
+    <h3 class="predText">予測結果</h3>
+    <div class="predictTable">
          <table>
              <thead>
                  <tr>
                      <th>馬番</th>
-                     <th>モデル1</th>
-                     <th>モデル2</th>
-                     <th>モデル3</th>
-                     <th>モデル4</th>
-                     <th>モデル5</th>
-                     <th>モデル6</th>
-                     <th>モデル7</th>
-                     <th>モデル8</th>
+                     <th style="background-color: hsl(0, 100%, 70%);">モデル1</th>
+                     <th style="background-color: hsl(39, 100%, 70%);">モデル2</th>
+                     <th style="background-color: hsl(60, 100%, 75%);">モデル3</th>
+                     <th style="background-color: hsl(80, 61%, 75%);">モデル4</th>
+                     <th style="background-color: hsl(120, 100%, 75%);">モデル5</th>
+                     <th style="background-color: hsl(180, 100%, 75%);">モデル6</th>
+                     <th style="background-color: hsl(240, 100%, 75%);">モデル7</th>
+                     <th style="background-color: hsl(300, 100%, 75%);">モデル8</th>
                  </tr>
              </thead>
-             <tbody>
+             <tbody id="data-table">
     """
 
     cursor.execute(
@@ -219,6 +222,7 @@ def gen_result_html(cursor, race_id, name, location, number):
     pred_table += """
         </tbody>
     </table>
+  </div>
     """
 
     html = head + runners_table + (pred_table if len(predicts) > 0 else apologize) + footer

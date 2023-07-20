@@ -1,0 +1,46 @@
+
+
+.predictTable th, 
+.predictTable td {
+    /* border-left: 7px double black; */
+    /* border-right: 7px double black; */
+    border: 5px double black;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.predictTable table{
+    background-color: #ffffff;
+    border: 3px double black;
+    margin: auto;
+    margin-bottom: 30px;
+    width: 80%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+}
+
+/* 
+.predictTable tbody tr:nth-child(odd) {
+    background-color: #eee
+} */
+
+
+.predText {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.top1 {
+    background-color: rgb(230, 181, 36);
+}
+
+.top2 {
+    background-color: rgb(170, 168, 168);
+}
+
+.top3 {
+    background-color: #b48347;
+}
