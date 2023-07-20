@@ -58,25 +58,6 @@ def gen_result_html(cursor, race_id, name, location, number):
                     <tbody>
     """.format(name, location, number, name, name, location)
 
-    column = """
-            <h3>予測結果</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>単勝</th>
-                        <th>複勝</th>
-                        <th>枠連</th>
-                        <th>馬連</th>
-                        <th>馬単</th>
-                        <th>ワイド</th>
-                        <th>3連単</th>
-                        <th>3連複</th>
-                    </tr>
-                </thead>
-                <tbody>
-    """
-
     apologize = """
         <div class="mitei">
             <p class="notyet">まだ予測結果はありません</p>
@@ -171,7 +152,7 @@ def gen_result_html(cursor, race_id, name, location, number):
     ###############################################################################
 # <h3>予測結果</h3>
     pred_table = """
-    <h3 class="predText">予測結果</h3>
+    <p class="predText">予測結果</p>
     <div class="predictTable">
          <table>
              <thead>
