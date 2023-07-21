@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 
+
 def get_dates():
     today = datetime.date.today()
     current_weekday = today.weekday()
@@ -15,13 +16,14 @@ def get_dates():
 
     return [last_saturday, last_sunday, this_saturday, this_sunday]
 
+
 def waku_color(runners, pred_run_num):
     for runner in runners:
-        if(runner[0] == pred_run_num):
+        if (runner[0] == pred_run_num):
             return runner[1]
-        
 
-def gen_result_html(cursor, race_id, name, location, number):
+
+def gen_result_html(cursor, race_id, name, location, number, time):
     head = """
     <!-- ２ページ目 -->
     <!DOCTYPE html>
@@ -45,6 +47,9 @@ def gen_result_html(cursor, race_id, name, location, number):
                 <div class="race-info">
                     <p>{} {}R:{}</p>
                 </div>
+                <div class="start-time">
+                    <p>{}開始</p>
+                </div>
             </header>
 
             <script src="../js/logo_resize.js"></script>
@@ -62,7 +67,7 @@ def gen_result_html(cursor, race_id, name, location, number):
                         </tr>
                     </thead>
                     <tbody>
-    """.format(name, location, number, name, name, location)
+    """.format(name, location, number, name, time)
 
     apologize = """
         <div class="mitei">
@@ -127,7 +132,7 @@ def gen_result_html(cursor, race_id, name, location, number):
         "background-color: green;",
         "background-color: orange;",
         "background-color: pink;",
-        ]
+    ]
     for runner in runners:
         row = """
         <tr>
@@ -201,8 +206,10 @@ def gen_result_html(cursor, race_id, name, location, number):
   </div>
     """
 
-    html = head + runners_table + (pred_table if len(predicts) > 0 else apologize) + footer
+    html = head + runners_table + \
+        (pred_table if len(predicts) > 0 else apologize) + footer
     return html
+
 
 def main():
     conn = sqlite3.connect('./races.sqlite')
@@ -212,17 +219,18 @@ def main():
     # dates[0] = "2023-06-17"
     for date in dates:
         cursor.execute("""
-                    SELECT id, name, location, number FROM races WHERE date='{}'
+                    SELECT id, name, location, number, time FROM races WHERE date='{}'
         """.format(date))
         races = cursor.fetchall()
 
         for race in races:
-            html = gen_result_html(cursor, race[0], race[1], race[2], race[3])
+            html = gen_result_html(cursor, race[0], race[1], race[2], race[3], race[4])
             f = open(
                 'src/result/{}.html'.format(race[0]), 'w', encoding='utf-8')
             f.write(html)
             f.close
     conn.close()
+
 
 if __name__ == "__main__":
     main()
