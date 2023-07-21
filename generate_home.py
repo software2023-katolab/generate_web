@@ -4,6 +4,7 @@ import datetime
 conn = sqlite3.connect('races.sqlite')
 cursor = conn.cursor()
 
+# 先週・今週と土曜・日曜の日時を取得
 today = datetime.date.today()
 current_weekday = today.weekday()
 last_saturday = today - datetime.timedelta(days=current_weekday + 2)
@@ -17,6 +18,7 @@ this_saturday = this_saturday.strftime('%Y-%m-%d')
 
 dates = [last_saturday, last_sunday, this_saturday, this_sunday, ]
 
+# 各日のレース情報を取得
 cursor.execute("SELECT * FROM races WHERE date = '" + last_saturday + "'")
 last_sat_data = cursor.fetchall()
 cursor.execute("SELECT * FROM races WHERE date = '" + last_sunday + "'")
@@ -70,7 +72,7 @@ html2 = """</title>
 
 mitei = """
     <div class="mitei">
-        <p class="notyet">まだレースの詳細はありません</p>
+        <p class="notyet">レース情報は当日朝に更新されます</p>
         <img class="dogeza" src="image/pose_syazai_man.png">
     </div>
 """
