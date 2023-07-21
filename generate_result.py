@@ -168,26 +168,18 @@ def gen_result_html(cursor, race_id, name, location, number):
                      <th style="background-color: hsl(39, 100%, 70%);">モデル2</th>
                      <th style="background-color: hsl(60, 100%, 75%);">モデル3</th>
                      <th style="background-color: hsl(80, 61%, 75%);">モデル4</th>
-                     <th style="background-color: hsl(120, 100%, 75%);">モデル5</th>
-                     <th style="background-color: hsl(180, 100%, 75%);">モデル6</th>
-                     <th style="background-color: hsl(240, 100%, 75%);">モデル7</th>
-                     <th style="background-color: hsl(300, 100%, 75%);">モデル8</th>
                  </tr>
              </thead>
              <tbody id="data-table">
     """
 
     cursor.execute(
-        'SELECT runners_number, model1, model2, model3, model4, model5, model6, model7, model8 FROM predicts where race_id={}'.format(race_id))
+        'SELECT runners_number, model1, model2, model3, model4 FROM predicts where race_id={}'.format(race_id))
     predicts = cursor.fetchall()
     for predict in predicts:
         pred = """
         <tr>
             <th style="{}">{}</th>
-            <td>{}</td>
-            <td>{}</td>
-            <td>{}</td>
-            <td>{}</td>
             <td>{}</td>
             <td>{}</td>
             <td>{}</td>
@@ -200,10 +192,6 @@ def gen_result_html(cursor, race_id, name, location, number):
             predict[2],
             predict[3],
             predict[4],
-            predict[5],
-            predict[6],
-            predict[7],
-            predict[8],
         )
         pred_table += pred
 
