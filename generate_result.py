@@ -21,6 +21,7 @@ def waku_color(runners, pred_run_num):
     for runner in runners:
         if (runner[0] == pred_run_num):
             return runner[1]
+    return 1
 
 
 def gen_result_html(cursor, race_id, name, location, number, time):
@@ -72,13 +73,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
     apologize = """
         <div class="mitei">
             <p class="notyet">まだ予測結果はありません</p>
-            <div class="leftTime">
-                <p>
-                    予想結果更新まで残り <span id="left_days"></span>日 <span id="left_hours"></span>時間
-                    <span id="left_mins"></span>分 <span id="left_secs"></span>秒
-                </p>
-                <script src="../js/countdown.js"></script>
-            </div>
+            <p class="notyet">レース開始の30分前に更新されます</p>
             <img class="dogeza" src="../image/yakidogeza.jpg">
         </div>
     """
@@ -122,6 +117,8 @@ def gen_result_html(cursor, race_id, name, location, number, time):
 
     """.format(race_id))
     runners = cursor.fetchall()
+    runners = sorted(runners, key=lambda x: int(x[0]))
+    runners = sorted(runners, key=lambda x: int(x[1]))
     runners_table = ""
     colors = [
         "background-color: white;",
@@ -144,7 +141,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
             <td>{}</td>
         </tr>
         """.format(
-            colors[runner[1]-1],
+            colors[int(runner[1])-1],
             runner[1],
             runner[0],
             runner[2],
@@ -191,7 +188,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
             <td>{}</td>
         </tr>
         """.format(
-            colors[waku_color(runners, predict[0])-1],
+            colors[int(waku_color(runners, predict[0]))-1],
             predict[0],
             predict[1],
             predict[2],

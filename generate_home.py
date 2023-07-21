@@ -57,14 +57,6 @@ html2 = """</title>
     </header>
     
     <script src="js/logo_resize.js"></script>
-    
-    <div class="leftTime">
-        <p>
-            予想結果更新まで残り <span id="left_days"></span>日 <span id="left_hours"></span>時間
-            <span id="left_mins"></span>分 <span id="left_secs"></span>秒
-        </p>
-        <script src="js/countdown.js"></script>
-    </div>
 """
 
 # button
