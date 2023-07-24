@@ -1,7 +1,7 @@
 // カイジ風「ざわ。。。」を出現させるjs
 function displayZawa(top, left, scale) {
     const imageElement = document.createElement("img");
-    imageElement.src = "../image/zawa.png";
+    imageElement.src = "/src/image/zawa.png";
 
     imageElement.style.position = "fixed";
     imageElement.style.top = top;
@@ -33,7 +33,9 @@ function fadeInOutAnimation(ie){
                 duration: 1000, // アニメーションの時間（ミリ秒）
                 fill: "forwards" // アニメーションの最後のフレームを保持
             }
-        )
+        ).onfinish = () => {
+            document.body.removeChild(ie);
+        };
     }, 1500)
 }
 
@@ -72,4 +74,3 @@ const interval = setInterval(() => {
 setTimeout(() => {
     clearInterval(interval); 
 }, 1000);
-

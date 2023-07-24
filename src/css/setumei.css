@@ -1,0 +1,19 @@
+.setumei table {
+    background-color: #ffffff;
+    margin: auto;
+    width: 60%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.setumei table th,
+.setumei table td {
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.setumei table tbody tr:nth-child(odd) {
+    background-color: #eee
+}

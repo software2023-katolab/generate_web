@@ -77,10 +77,36 @@ def gen_result_html(cursor, race_id, name, location, number, time):
             <img class="dogeza" src="../image/yakidogeza.jpg">
         </div>
     """
-
-    pred_footer = """
-            </tbody>
-        </table>
+    
+    explanation = """
+          <div class="setumei">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>モデル</th>
+                            <th>予測対象</th>
+                            <th>過去三年分の回収率シミュレーション</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>擬似期待値型モデル</td>
+                            <td>その馬の単勝オッズに順位の要素を掛け合わせた値</td>
+                            <td>スコア2.7以上の馬に単勝で賭け続けた時、回収率が100%を超えました。最大で回収率は1500%となりました。成績としては一番良いモデルです。</td>
+                        </tr>
+                        <tr>
+                            <td>的中型モデル</td>
+                            <td>その馬が1位になるかどうか</td>
+                            <td>スコア3.7以上の馬に単勝で賭け続けた時、回収率が100%を超えました。一番回収率のブレが少ないですが、一番回収率も小さいモデルです。</td>
+                        </tr>
+                        <tr>
+                            <td>スピード型モデル</td>
+                            <td>その馬のゴールまでの平均速度</td>
+                            <td>スコア2.4以上の馬に単勝で賭け続けた時、回収率が100%を超えました。しかし、その後ブレがありスコアが高くても100%を超えない時があります。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     """
 
     footer = """
@@ -156,6 +182,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
                     </tbody>
             </table>
         </div>
+        <p style="text-align: center;">最新のオッズは公式を参照してください</p>
     """
     ###############################################################################
 # <h3>予測結果</h3>
@@ -166,10 +193,10 @@ def gen_result_html(cursor, race_id, name, location, number, time):
              <thead>
                  <tr>
                      <th>馬番</th>
-                     <th style="background-color: hsl(0, 100%, 70%);">モデル1</th>
-                     <th style="background-color: hsl(39, 100%, 70%);">モデル2</th>
-                     <th style="background-color: hsl(60, 100%, 75%);">モデル3</th>
-                     <th style="background-color: hsl(80, 61%, 75%);">モデル4</th>
+                     <th style="background-color: hsl(0, 100%, 70%);">擬似期待値型モデル</th>
+                     <th style="background-color: hsl(39, 100%, 70%);">的中型モデル</th>
+                     <th style="background-color: hsl(60, 100%, 75%);">スピード型モデル</th>
+                     <th style="background-color: hsl(80, 61%, 75%);">アンサンブル</th>
                  </tr>
              </thead>
              <tbody id="data-table">
@@ -178,6 +205,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
     cursor.execute(
         'SELECT runners_number, model1, model2, model3, model4 FROM predicts where race_id={}'.format(race_id))
     predicts = cursor.fetchall()
+    predicts = sorted(predicts, key=lambda x: int(x[0]))
     for predict in predicts:
         pred = """
         <tr>
@@ -204,7 +232,7 @@ def gen_result_html(cursor, race_id, name, location, number, time):
     """
 
     html = head + runners_table + \
-        (pred_table if len(predicts) > 0 else apologize) + footer
+        (pred_table if len(predicts) > 0 else apologize) + explanation + footer
     return html
 
 
