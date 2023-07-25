@@ -1,0 +1,285 @@
+
+    <!-- ２ページ目 -->
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../css/style.css">
+            <title>HBC賞</title>
+        </head>
+
+        <body>
+
+            <header class="header">
+                <div class="header-inner">
+                    <a class="header-logo" href="../this_sat.html">
+                        <img class="logo" src="../image/katomusume_clear.png">
+                    </a>
+                </div>
+                <div class="race-info">
+                    <p>札幌 9R:HBC賞</p>
+                </div>
+                <div class="start-time">
+                    <p>14:15開始</p>
+                </div>
+            </header>
+
+            <script src="../js/logo_resize.js"></script>
+
+            <div class="raceCard">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>枠</th>
+                            <th>馬番</th>
+                            <th>馬名</th>
+                            <th>性齢</th>
+                            <th>騎手</th>
+                            <th>予想オッズ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+        <tr>
+            <td style="background-color: white;">1</td>
+            <td>1</td>
+            <td>ジョリダム</td>
+            <td>牝3</td>
+            <td>小沢</td>
+            <td>6.5</td>
+        </tr>
+        
+        <tr>
+            <td style="color: white; background-color: black;">2</td>
+            <td>2</td>
+            <td>ベジェサ</td>
+            <td>牝4</td>
+            <td>池添</td>
+            <td>21.4</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: red;">3</td>
+            <td>3</td>
+            <td>ミズノコキュウ</td>
+            <td>牝4</td>
+            <td>横山武</td>
+            <td>5.7</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: blue;">4</td>
+            <td>4</td>
+            <td>セイレーン</td>
+            <td>牝5</td>
+            <td>佐々木</td>
+            <td>46.7</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: yellow;">5</td>
+            <td>5</td>
+            <td>テンメジャーガール</td>
+            <td>牝4</td>
+            <td>亀田</td>
+            <td>12.7</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: green;">6</td>
+            <td>6</td>
+            <td>シロン</td>
+            <td>牝4</td>
+            <td>丹内</td>
+            <td>5.2</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: orange;">7</td>
+            <td>7</td>
+            <td>ショウナンアメリア</td>
+            <td>牝4</td>
+            <td>美浦奥村武</td>
+            <td>10101.0</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: orange;">7</td>
+            <td>8</td>
+            <td>ナリタローゼ</td>
+            <td>牝5</td>
+            <td>北村友</td>
+            <td>4.3</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: pink;">8</td>
+            <td>9</td>
+            <td>エイシンフェンサー</td>
+            <td>牝3</td>
+            <td>川又</td>
+            <td>3.5</td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: pink;">8</td>
+            <td>10</td>
+            <td>ポルタフォルトゥナ</td>
+            <td>牝4</td>
+            <td>吉田隼</td>
+            <td>13.4</td>
+        </tr>
+        
+                    </tbody>
+            </table>
+        </div>
+        <p style="text-align: center;">最新のオッズは公式を参照してください</p>
+    
+    <p class="predText">予測結果</p>
+    <div class="predictTable">
+         <table>
+             <thead>
+                 <tr>
+                     <th>馬番</th>
+                     <th style="background-color: hsl(0, 100%, 70%);">擬似期待値型モデル</th>
+                     <th style="background-color: hsl(39, 100%, 70%);">的中型モデル</th>
+                     <th style="background-color: hsl(60, 100%, 75%);">スピード型モデル</th>
+                     <th style="background-color: hsl(80, 61%, 75%);">アンサンブル</th>
+                 </tr>
+             </thead>
+             <tbody id="data-table">
+    
+        <tr>
+            <th style="background-color: white;">1</th>
+            <td>-1.1234546949383442</td>
+            <td>-0.8071732007019853</td>
+            <td>0.7962016989523992</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="color: white; background-color: black;">2</th>
+            <td>0.7325617161185898</td>
+            <td>1.677044745733425</td>
+            <td>-1.83417131668518</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: red;">3</th>
+            <td>-0.04209276812395113</td>
+            <td>-0.9532680752499842</td>
+            <td>0.8346618174197844</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: blue;">4</th>
+            <td>-0.16423942625759266</td>
+            <td>0.15846062887431317</td>
+            <td>-1.210238773671949</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: yellow;">5</th>
+            <td>0.36493917786494834</td>
+            <td>-0.8522071435806831</td>
+            <td>0.8380843485285541</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: green;">6</th>
+            <td>1.266419472210326</td>
+            <td>1.636783797551936</td>
+            <td>-1.3874517500699253</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: orange;">7</th>
+            <td>-9999.0</td>
+            <td>-9999.0</td>
+            <td>-9999.0</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: orange;">8</th>
+            <td>1.7984253823664351</td>
+            <td>-0.33690101000332706</td>
+            <td>0.18270280778260925</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: pink;">9</th>
+            <td>-0.6144347626699069</td>
+            <td>-0.9665355780053636</td>
+            <td>0.6533886801699752</td>
+            <td>1.0</td>
+        </tr>
+        
+        <tr>
+            <th style="background-color: pink;">10</th>
+            <td>-1.5354166071256343</td>
+            <td>-0.5029033134551308</td>
+            <td>0.8062804681235207</td>
+            <td>1.0</td>
+        </tr>
+        
+        </tbody>
+    </table>
+  </div>
+    
+          <div class="setumei">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>モデル</th>
+                            <th>予測対象</th>
+                            <th>過去三年分の回収率シミュレーション</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>擬似期待値型モデル</td>
+                            <td>その馬の単勝オッズに順位の要素を掛け合わせた値</td>
+                            <td>スコア2.7以上の馬に単勝で賭け続けた時、回収率が100%を超えました。最大で回収率は1500%となりました。成績としては一番良いモデルです。</td>
+                        </tr>
+                        <tr>
+                            <td>的中型モデル</td>
+                            <td>その馬が1位になるかどうか</td>
+                            <td>スコア3.7以上の馬に単勝で賭け続けた時、回収率が100%を超えました。一番回収率のブレが少ないですが、一番回収率も小さいモデルです。</td>
+                        </tr>
+                        <tr>
+                            <td>スピード型モデル</td>
+                            <td>その馬のゴールまでの平均速度</td>
+                            <td>スコア2.4以上の馬に単勝で賭け続けた時、回収率が100%を超えました。しかし、その後ブレがありスコアが高くても100%を超えない時があります。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+        <script src="../js/addTop3Class.js"></script>
+        <script src="../js/zawazawa.js"></script>
+            <footer>
+                <div class="caution">
+                    <ul>
+                        <li>(注)本サイトはあくまで競馬の結果を予測するものであり、結果を保証するものではありません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サイトが提供するいかなるサービスを利用したことにより利用者に発生した損害について</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;本サービス提供者は一切賠償責任を負いません。</li>
+                        <li>&emsp;&nbsp;&nbsp;&thinsp;馬券の購入はご自身の判断で行ってください。</li>
+                    </ul>
+
+                    <a class="returnpage" href="../this_sat.html">
+                        <p>トップページへ</p>
+                    </a>
+                </div>
+            </footer>
+        </body>
+    </html>
+    

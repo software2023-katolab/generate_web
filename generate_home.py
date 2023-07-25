@@ -183,7 +183,7 @@ for loc in location:
             racedata = """
                     <li class="'raceData"><a href="result/{}.html">{}R:{}</a></li>""".format(race[0],race[3],race[2])
             for1 = for1 + racedata
-    rt_last_sun = rt_last_sat + for1 + """
+    rt_last_sun = rt_last_sun + for1 + """
         </ul>"""
 rt_last_sun = rt_last_sun + """
 </div>"""
