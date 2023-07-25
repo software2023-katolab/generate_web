@@ -194,22 +194,26 @@ def gen_result_html(cursor, race_id, name, location, number, time):
                  <tr>
                      <th>馬番</th>
                      <th style="background-color: hsl(0, 100%, 70%);">擬似期待値型モデル</th>
+                     <th style="background-color: hsl(220, 100%, 70%);">スタッキング擬似期待値型モデル</th>
                      <th style="background-color: hsl(39, 100%, 70%);">的中型モデル</th>
+                     <th style="background-color: hsl(92, 100%, 70%);">スタッキング的中型モデル</th>
                      <th style="background-color: hsl(60, 100%, 75%);">スピード型モデル</th>
-                     <th style="background-color: hsl(80, 61%, 75%);">アンサンブル</th>
+                     <th style="background-color: hsl(19, 100%, 75%);">スタッキングスピード型モデル</th>
                  </tr>
              </thead>
              <tbody id="data-table">
     """
 
     cursor.execute(
-        'SELECT runners_number, model1, model2, model3, model4 FROM predicts where race_id={}'.format(race_id))
+        'SELECT runners_number, model1, model2, model3, model4, model5, model6 FROM predicts where race_id={}'.format(race_id))
     predicts = cursor.fetchall()
     predicts = sorted(predicts, key=lambda x: int(x[0]))
     for predict in predicts:
         pred = """
         <tr>
             <th style="{}">{}</th>
+            <td>{}</td>
+            <td>{}</td>
             <td>{}</td>
             <td>{}</td>
             <td>{}</td>
@@ -222,6 +226,8 @@ def gen_result_html(cursor, race_id, name, location, number, time):
             predict[2],
             predict[3],
             predict[4],
+            predict[5],
+            predict[6],
         )
         pred_table += pred
 

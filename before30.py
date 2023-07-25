@@ -34,14 +34,16 @@ def before30 ():
         new_odds_table = runner_table[runner_table['race_id'] == ids[i]]
         new_odds_table.to_sql('runners', conn, if_exists='append', index=None)
         
-    pred_table = shutuba_table[['race_id', '馬番', 'oddsrank_score', 'rank1to1_score', 'speed_score', '開催']].copy()
+    pred_table = shutuba_table[['race_id', '馬番', 'oddsrank_score', 'stacking_oddsrank_score', \
+                            'rank1to1_score', 'stacking_rank1to1_score', 'speed_score', 'stacking_speed_score']].copy()
     pred_table.rename(columns={'馬番' : 'runners_number', 
-                                'oddsrank_score' : 'model1',
-                                'rank1to1_score' : 'model2',
-                                'speed_score' : 'model3',
-                                #   'モデル4' : 'model4'
-                                '開催' : 'model4',}, 
-                        inplace=True)
+                           'oddsrank_score' : 'model1',
+                           'stacking_oddsrank_score' : 'model2',
+                            'rank1to1_score' : 'model3',
+                            'stacking_rank1to1_score' : 'model4',
+                            'speed_score' : 'model5',
+                            'stacking_speed_score' : 'model6',}, 
+                  inplace=True)
     
     pred_table.to_sql('predicts', conn, if_exists='append', index=None)
 
