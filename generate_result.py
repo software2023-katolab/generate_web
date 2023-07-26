@@ -104,6 +104,21 @@ def gen_result_html(cursor, race_id, name, location, number, time):
                             <td>その馬のゴールまでの平均速度</td>
                             <td>スコア2.4以上の馬に単勝で賭け続けた時、回収率が100%を超えました。しかし、その後ブレがありスコアが高くても100%を超えない時があります。</td>
                         </tr>
+                        <tr>
+                            <td>スタッキング擬似期待値型モデル</td>
+                            <td>その馬の単勝オッズに順位の要素を掛け合わせた値<</td>
+                            <td>このモデルは三年分ではなく2023年の1月〜7月23日のレースについてシミュレーションした時、スコア2.6以上の馬に複勝で賭けると回収率が100%を超えました。スタッキングモデルの特徴は元のモデルと同じです。</td>
+                        </tr>
+                        <tr>
+                            <td>スタッキング的中型モデル</td>
+                            <td>その馬が1位になるかどうか</td>
+                            <td>このモデルは三年分ではなく2023年の1月〜7月23日のレースについてシミュレーションした時、スコア1.8以上の馬に三連単でかけた場合に回収率が100%を超えました。最大で300%の回収率となりました。</td>
+                        </tr>
+                        <tr>
+                            <td>スタッキングスピード型モデル</td>
+                            <td>その馬のゴールまでの平均速度</td>
+                            <td>このモデルは三年分ではなく2023年の1月〜7月23日のレースについてシミュレーションした時、スコア2.8以上の馬に単勝でかけた場合に回収率が100%を超えました。最大で250%の回収率となりました。</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -222,12 +237,12 @@ def gen_result_html(cursor, race_id, name, location, number, time):
         """.format(
             colors[int(waku_color(runners, predict[0]))-1],
             predict[0],
-            predict[1],
-            predict[2],
-            predict[3],
-            predict[4],
-            predict[5],
-            predict[6],
+            round(predict[1],4),
+            round(predict[2],4),
+            round(predict[3],4),
+            round(predict[4],4),
+            round(predict[5],4),
+            round(predict[6],4),
         )
         pred_table += pred
 
